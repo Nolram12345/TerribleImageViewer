@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31321.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MiniImageView", "MiniImageView\MiniImageView.vcxproj", "{CE028E3A-0B0B-4F2B-9D28-4B1276225442}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Debug|x64.ActiveCfg = Debug|x64
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Debug|x64.Build.0 = Debug|x64
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Debug|x86.ActiveCfg = Debug|Win32
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Debug|x86.Build.0 = Debug|Win32
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Release|x64.ActiveCfg = Release|x64
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Release|x64.Build.0 = Release|x64
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Release|x86.ActiveCfg = Release|Win32
+		{CE028E3A-0B0B-4F2B-9D28-4B1276225442}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {104530D2-C5B8-4CFD-8B2D-1E2865C81A50}
+	EndGlobalSection
+EndGlobal
