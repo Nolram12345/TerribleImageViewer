@@ -1,5 +1,13 @@
-#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup")
-#pragma warning (disable : 4996)
+// I made this image viewer in less than an hour because I needed to view a TGA file.
+// 
+// It often works.
+// 
+// But don't use this.
+// This is very bad code.
+// Don't go any further.
+
+#pragma comment(linker, "/SUBSYSTEM:windows /ENTRY:mainCRTStartup") // I could do this in the project settings, but this is quicker
+#pragma warning (disable : 4996) // Disabling a warning that annoyed me.
 #include "imgui/imgui.h"
 #include "imgui/imgui_impl_win32.h"
 #include "imgui/imgui_impl_dx11.h"
@@ -13,7 +21,7 @@
 #include <d3d11.h>
 #include <tchar.h>
 
-// Data
+// DX11 Data.
 static ID3D11Device* g_pd3dDevice = NULL;
 static ID3D11DeviceContext* g_pd3dDeviceContext = NULL;
 static IDXGISwapChain* g_pSwapChain = NULL;
@@ -22,7 +30,7 @@ unsigned char* image_data{};
 int image_width = 0;
 int image_height = 0;
 
-// Forward declarations of helper functions
+// Forward declarations of helper functions (because C++ can't figure out where the functions are otherwise)
 bool CreateDeviceD3D(HWND hWnd);
 void CleanupDeviceD3D();
 void CreateRenderTarget();
@@ -30,7 +38,7 @@ void CleanupRenderTarget();
 bool LoadTextureFromFile(const char* filename, int* out_width, int* out_height);
 bool DataToTexture(ID3D11ShaderResourceView** out_srv, int* out_width, int* out_height);
 
-LRESULT WINAPI WndProcA(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
+LRESULT WINAPI WndProcA(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam); // Define window message handler.
 
 // Main code
 int main(int argc, char* argv[])
@@ -44,7 +52,7 @@ int main(int argc, char* argv[])
     LoadTextureFromFile(argv[1], &image_width, &image_height);
 
     printf(argv[1]);
-    printf("\n");
+    printf("\n"); // Printf in a window-only app :)))
     std::string title = std::string(argv[1]).substr(std::string(argv[1]).find_last_of("\\") + 1) + " " + std::to_string(image_width) + "x" + std::to_string(image_height);
     printf(title.c_str());
 
@@ -73,7 +81,7 @@ int main(int argc, char* argv[])
 
     ID3D11ShaderResourceView* texture = NULL;
     bool ret = DataToTexture(&texture, &image_width, &image_height); // Loads the image as a texture
-    if (image_height > 1500) {
+    if (image_height > 1500) { // These scaling factors are arbitrary, but good enough for my use.
         display_image_height = image_height / 4;
         display_image_width = image_width / 4;
     }
@@ -103,6 +111,7 @@ int main(int argc, char* argv[])
     ImVec4* colors = ImGui::GetStyle().Colors;
     ImGuiStyle& style = ImGui::GetStyle();
 
+    // Here comes the useless theme block. Why is this here ?
     colors[ImGuiCol_Text] = ImVec4(1.00f, 1.00f, 1.00f, 1.00f);
     colors[ImGuiCol_TextDisabled] = ImVec4(0.50f, 0.50f, 0.50f, 1.00f);
     colors[ImGuiCol_WindowBg] = ImVec4(0.06f, 0.06f, 0.06f, 0.00f);
@@ -157,6 +166,7 @@ int main(int argc, char* argv[])
     colors[ImGuiCol_NavWindowingDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.20f);
     colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.80f, 0.80f, 0.80f, 0.35f);
 
+    // The only style code that actually matters
     style.WindowRounding = 0;
     style.GrabRounding = 0;
     style.FramePadding = { 0, 0 };
@@ -207,7 +217,7 @@ int main(int argc, char* argv[])
 
         ImGui::Begin("Viewer", NULL, window_flags);
         {
-            ImGui::Image((void*)texture, ImVec2(display_image_width, display_image_height));
+            ImGui::Image((void*)texture, ImVec2(display_image_width, display_image_height)); // Literally the only thing imgui gets called for
             ImGui::End();
         }
 
@@ -218,7 +228,7 @@ int main(int argc, char* argv[])
         g_pd3dDeviceContext->ClearRenderTargetView(g_mainRenderTargetView, clear_color_with_alpha);
         ImGui_ImplDX11_RenderDrawData(ImGui::GetDrawData());
 
-        g_pSwapChain->Present(1, 0); // Present with vsync
+        g_pSwapChain->Present(1, 0); // Present with vsync - don't ask me what this app needs vsync for
         //g_pSwapChain->Present(0, 0); // Present without vsync
     }
 
